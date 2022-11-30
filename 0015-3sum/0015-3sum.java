@@ -22,8 +22,9 @@ class Solution {
                     sAns.add(nums[start]);
                     sAns.add(nums[end]);
                     ans.add(sAns);
-                    int temp=nums[start];
-                    while(start<end && nums[start]==temp){
+                    start++;
+                    
+                    while(start<end && nums[start]==nums[start-1]){
                         start++;
                     }
                 }
