@@ -76,14 +76,20 @@ class GfG{
 
 
 class BinaryTree
-{   
-    static int sumBT(Node root){
-        if(root==null)
-            return 0;
-        
-        int ls=sumBT(root.left);
-        int rs=sumBT(root.right);
-        
-        return ls+rs+root.data;
-    }
+{
+static long sum;
+static int sumBT(Node head){
+sum=0l;
+preOrder(head);
+return (int)sum;
+//Code
+}
+static void preOrder(Node root){
+if(root==null){
+return;
+}
+sum+=(root.data*1l);
+preOrder(root.left);
+preOrder(root.right);
+}
 }
