@@ -77,19 +77,14 @@ class GfG{
 
 class BinaryTree
 {
-static int sum;
-static int sumBT(Node head){
-sum=0;
-preOrder(head);
-return sum;
-//Code
-}
-static void preOrder(Node root){
-if(root==null){
-return;
-}
-sum+=(root.data);
-preOrder(root.left);
-preOrder(root.right);
-}
+
+    static int sumBT(Node root){
+        if(root==null)
+            return 0;
+        
+        int ls=sumBT(root.left);
+        int rs=sumBT(root.right);
+        return ls+rs+root.data;
+
+    }
 }
