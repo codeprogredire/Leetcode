@@ -111,19 +111,14 @@ class GfG {
 /*Complete The Function Below*/
 class Tree
 {
-    static int count=0;
-    public static void solve(Node root){
-        if(root==null)
-            return;
-        
-        count+=1;
-        solve(root.left);
-        solve(root.right);
-    }
 	public static int getSize(Node root)
 	{
-	    count=0;
-	    solve(root);
-	    return count;
+	    if(root==null)
+	        return 0;
+	    
+	    int ls=getSize(root.left);
+	    int rs=getSize(root.right);
+	    
+	    return ls+rs+1;
     }
 }
