@@ -60,7 +60,7 @@ class Solution{
             prefixSum+=A[i];
             
             if(prefixSum==K){
-                ans=Math.max(ans,i+1);
+                ans=i+1;
             }
             
             int key=prefixSum-K;
