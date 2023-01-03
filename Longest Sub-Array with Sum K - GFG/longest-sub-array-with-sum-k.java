@@ -59,9 +59,8 @@ class Solution{
         for(int i=0;i<N;i++){
             prefixSum+=A[i];
             
-            if(prefixSum==K){
+            if(prefixSum==K)
                 ans=i+1;
-            }
             
             int key=prefixSum-K;
             
