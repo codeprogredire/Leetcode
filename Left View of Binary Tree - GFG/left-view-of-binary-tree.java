@@ -125,30 +125,37 @@ class Tree
     //Function to return list containing elements of left view of binary tree.
     ArrayList<Integer> leftView(Node root)
     {
+        //arraylist to store the left view of the tree
       ArrayList<Integer>ans=new ArrayList<>();
       
-      if(root==null)return ans;
+      if(root==null)
+        return ans;
       
-      //1. Add root to queue
+      //create a queue and add the root node in it
       Queue<Node>q=new LinkedList<>();
       q.add(root);
       
-      while(q.size()>0){
+      while(!q.isEmpty()){
           //number of nodes in current level
           int size=q.size();
           
-          //Perform RPA on every node of every level
           for(int i=0;i<size;i++){
               Node node=q.remove();
-              //adding first node of each level to ans
+              
+              //add the first node of each level to ans
               if(i==0)
                 ans.add(node.data);
-              
-              if(node.left!=null) q.add(node.left);
-              if(node.right!=null) q.add(node.right);
                 
+                
+            //add left child to queue if it exists    
+              if(node.left!=null)
+                q.add(node.left);
+                
+              if(node.right!=null)
+                q.add(node.right);
           }
       }
       return ans;
+      
     }
 }
