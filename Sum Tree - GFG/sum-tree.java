@@ -116,26 +116,50 @@ class Node
 */
 class Solution
 {
-    int sum(Node root){
-        if(root==null)
-            return 0;
-        
-        return root.data+sum(root.left)+sum(root.right);
+    class Pair{
+        boolean first;
+        int second;
+        Pair(){
+            first=true;
+            second=0;
+        }
+        Pair(boolean f,int s){
+            first=f;
+            second=s;
+        }
     }
+    Pair fastSum(Node root){
+        if(root==null)
+            return new Pair();
+        
+        //node is leaf
+        if(root.left==null && root.right==null){
+            return new Pair(true,root.data);
+        }
+        
+        //node is not leaf
+        Pair leftAns=fastSum(root.left);
+        Pair rightAns=fastSum(root.right);
+        
+        boolean left=leftAns.first;
+        boolean right=rightAns.first;
+        boolean cond=root.data==leftAns.second+rightAns.second;
+        
+        Pair ans=new Pair();
+        if(left && right && cond){
+            ans.first=true;
+            ans.second=2*root.data;
+        }
+        else{
+            ans.first=false;
+        }
+        
+        return ans;
+        
+    }
+    
 	boolean isSumTree(Node root)
 	{
-	        if(root==null)
-	            return true;
-	         //node is not leaf
-             if(root.left!=null || root.right!=null){
-                 int s=sum(root.left)+sum(root.right);
-                 if(s==root.data){
-                     return isSumTree(root.left)&& isSumTree(root.right);
-                 }
-                 else
-                    return false;
-             }
-             else
-                return true;
+	        return fastSum(root).first;
 	}
 }
