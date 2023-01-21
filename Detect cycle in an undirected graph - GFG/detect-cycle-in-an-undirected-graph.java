@@ -41,7 +41,7 @@ class Solution {
             parent=p;
         }
     }
-    public boolean detectCycle(int x,ArrayList<ArrayList<Integer>>adj,boolean vis[]){
+    public boolean detectCycleBFS(int x,ArrayList<ArrayList<Integer>>adj,boolean vis[]){
         Queue<Pair>q=new LinkedList<>();
         q.add(new Pair(x,-1));
         
@@ -60,14 +60,42 @@ class Solution {
         }
         return false;
     }
+    public boolean detectCycleDFS(Pair pair,ArrayList<ArrayList<Integer>>adj,boolean vis[]){
+        int node=pair.node;
+        int parent=pair.parent;
+        
+        //mark the node as visited
+        vis[node]=true;
+        
+        for(Integer neighbour : adj.get(node)){
+            if(vis[neighbour]==false){
+                boolean sAns= detectCycleDFS(new Pair(neighbour,node),adj,vis);
+                if(sAns==true)
+                    return true;
+            }
+            else if(neighbour!=parent)
+                return true;
+        }
+        return false;
+    }
     public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
         boolean vis[]=new boolean[V];
         
+        
+        /*
         for(int i=0;i<V;i++){
             if(vis[i]==false){
-                if(detectCycle(i,adj,vis))return true;
+                if(detectCycleBFS(i,adj,vis))return true;
             }
         }
+        */
+        for(int i=0;i<V;i++){
+            if(vis[i]==false){
+                Pair p=new Pair(i,-1);
+                if(detectCycleDFS(p,adj,vis))return true;
+            }
+        }
+        
         return false;
     }
 }
